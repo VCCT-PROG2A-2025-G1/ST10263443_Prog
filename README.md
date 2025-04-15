@@ -3,7 +3,7 @@
 Welcome to the cyberbot chatbot that helps you navigate the dangerous world of the cyber world.
 
 // FULL TOUR //
-to see the code explained and demonstrated click the link below
+to see the code explained and demonstrated click the YouTube link: 
 https://youtu.be/4IQO9Q5wvec
 
 // INSTALLATION //
