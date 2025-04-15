@@ -7,7 +7,9 @@ namespace CyberBot
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, CyberBot!");
+            Greeting.LogoPrint();
+            Greeting.OpeningTone();
+            string userResponse = Greeting.InitializeName();
         }
     }
 }
