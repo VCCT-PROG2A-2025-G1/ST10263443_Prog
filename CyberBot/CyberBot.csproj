@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\OpeningTone.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\OpeningTone.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Speech" Version="9.0.3" />
     <PackageReference Include="System.Windows.Extensions" Version="9.0.4" />
   </ItemGroup>
