@@ -13,7 +13,8 @@ namespace CyberBot
         // This method plays a sound file when the program starts
         public static void OpeningTone()
         {
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Assets", "OpeningTone.wav"); // Path to the sound file
+            string filePath =Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "OpeningTone.wav");
+            // Path to the sound file
             SoundPlayer tone = new SoundPlayer(filePath); // Create a SoundPlayer object with the file path
             tone.Load(); // Load the sound file
             tone.PlaySync(); // Play the sound synchronously
