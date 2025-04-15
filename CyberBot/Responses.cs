@@ -46,10 +46,6 @@ namespace CyberBot
                         Methods.PrintCenteredStaticText("Use secure websites, avoid clicking on suspicious links, and keep your software updated.");
                         Console.WriteLine();
                         break;
-                    case "does china have my info":
-                        Methods.PrintCenteredStaticText("Yes");
-                        Console.WriteLine();
-                        break;
                     case "exit":
                         Methods.PrintCenteredStaticText("Thank you for using CyberBot. Goodbye!");
                         synthesizer.Speak("Thank you for using CyberBot. Goodbye!");
