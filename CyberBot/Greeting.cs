@@ -10,49 +10,63 @@ namespace CyberBot
 {
     class Greeting
     {
+        // This method plays a sound file when the program starts
         public static void OpeningTone()
         {
-            string filePath = "C:\\Users\\Adria\\source\\repos\\CyberBot\\CyberBot\\Assets\\OpeningTone.wav";
-            SoundPlayer tone = new SoundPlayer(filePath);
-            tone.Load();
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Assets", "OpeningTone.wav"); // Path to the sound file
+            SoundPlayer tone = new SoundPlayer(filePath); // Create a SoundPlayer object with the file path
+            tone.Load(); // Load the sound file
             tone.PlaySync(); // Play the sound synchronously
         }
 
-        public static void LogoPrint() // printing logo
+        public static void LogoPrint() // This method prints the logo in the console
         {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;  // colour of logo
-            string logo = " ██████╗██╗   ██╗██████╗ ███████╗██████╗ ██████╗  ██████╗ ████████╗\r\n██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔═══██╗╚══██╔══╝\r\n██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝██████╔╝██║   ██║   ██║   \r\n██║       ╚██╔╝  ██╔══██╗██╔══╝  ██╔══██╗██╔══██╗██║   ██║   ██║   \r\n╚██████╗   ██║   ██████╔╝███████╗██║  ██║██████╔╝╚██████╔╝   ██║   \r\n ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═════╝  ╚═════╝    ╚═╝   \r\n                                                                  \r\n\r\n                           since 2025\r\n ";
-            Console.WriteLine(logo);
-            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.DarkYellow; // Set the text color to dark yellow
+
+            string logo =
+                "     ██████╗██╗   ██╗██████╗ ███████╗██████╗ ██████╗  ██████╗ ████████╗\n" +
+                "   ██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔═══██╗╚══██╔══╝\n" +
+                " ██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝██████╔╝██║   ██║   ██║   \n" +
+                " ██║       ╚██╔╝  ██╔══██╗██╔══╝  ██╔══██╗██╔══██╗██║   ██║   ██║   \n" +
+                " ╚██████╗   ██║   ██████╔╝███████╗██║  ██║██████╔╝╚██████╔╝   ██║   \n" +
+                "  ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═════╝  ╚═════╝    ╚═╝   \n" +
+                "\n" +
+                "since 2025"; // Logo text
+
+            foreach (string line in logo.Split('\n')) // split the logo into lines and print each line
+            {
+                Methods.PrintCenteredLogo(line.TrimEnd()); // Print each line centered
+            }
+
+            Console.ResetColor(); // Reset the console color to default
         }
 
-        // test of the speech synthesizer
+        /// This method initializes the user's name and greets them
         public static string? InitializeName()
         {
-            bool isValidName = false;
-            SpeechSynthesizer synthesizer = new SpeechSynthesizer();
+            SpeechSynthesizer synthesizer = new SpeechSynthesizer(); // Create a SpeechSynthesizer object for text-to-speech
 
-            while (!isValidName)
+            while (true) //Loop until a valid name is provided
             {
-                Console.WriteLine("Please tell me your name and we can get started");
-                synthesizer.Speak("Please tell me your name and we can get started");
+                    synthesizer.SpeakAsync("Please tell me your name and we can get started"); // Prompt the user for their name
+                string usersName = Methods.CenteredUserInput("Please tell me your name and we can get started:  ");
+                Console.WriteLine();
 
-                string usersName = Console.ReadLine();
-
-                if (string.IsNullOrEmpty(usersName))
+                if (string.IsNullOrEmpty(usersName)) //Check if the name is empty
                 {
-                    Console.WriteLine("Please enter a valid name to continue");
-                    synthesizer.Speak("Please enter a valid name to continue");
+                    synthesizer.SpeakAsync("Please enter a valid name to continue"); // Prompt the user to enter a valid name
+                    Methods.PrintCenteredStaticText("Please enter a valid name to continue");
+                    Console.WriteLine();
+                    continue;
                 }
                 else
                 {
-                    Console.WriteLine($"Hello {usersName}, How can I help you today?");
-                    synthesizer.Speak($"Hello {usersName}, How can I help you today?");
-                    string? userResponse = Console.ReadLine();
+                    synthesizer.SpeakAsync($"Hello {usersName}, How can I help you today?"); // Greet the user with their name
+                    string? userResponse = Methods.CenteredUserInput($"Hello {usersName}, How can I help you today?:  ");
+                    Console.WriteLine();
                     return userResponse;
                 }
             }
-            return null;
         }
     }
 }
