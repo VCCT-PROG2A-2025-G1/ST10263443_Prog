@@ -18,7 +18,7 @@ namespace CyberBot
                 {
                     case "how are you":
                         synthesizer.SpeakAsync("I am doing well, thank you for asking!");
-                        Methods.PrintCenteredStaticText("I am doing well, thank you for asking!"); // uses custom method to print centered text
+                        Methods.PrintCenteredStaticText("I am doing well, thank you for asking!"); // uses custom method to print centered text 
                         Console.WriteLine();
                         break;
                     case "what is your purpose":
