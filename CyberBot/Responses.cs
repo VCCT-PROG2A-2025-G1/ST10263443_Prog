@@ -41,7 +41,7 @@ namespace CyberBot
                         synthesizer.SpeakAsync("I am doing well, thank you for asking!");
                         Methods.PrintCenteredStaticText("CyberBot: I am doing well, thank you for asking!"); // uses custom method to print centered text
                         break;
-                    case string answer when answer.Contains("explain more"):
+                    case string answer when answer.Contains("explain"): // Continuous conversation about a topic
                         if (!string.IsNullOrEmpty(lastTopic))
                         {
                             synthesizer.SpeakAsync($"Sure, let's dive deeper into {lastTopic}.");
