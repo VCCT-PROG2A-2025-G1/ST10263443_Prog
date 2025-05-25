@@ -14,10 +14,15 @@ namespace CyberBot
     {
         static void Main(string[] args)
         { // Calling all classes 
+            Methods.BorderPrint();
+            Console.SetCursorPosition(75, 1);
             Greeting.LogoPrint();
+            Console.SetCursorPosition(75, 12);
             Greeting.OpeningTone();
-            string userResponse = Greeting.InitializeName();
-            Responses.GeneralQuestions(userResponse);
+            var (userResponse, usersName) = Greeting.InitializeName();
+            Responses.GeneralQuestions(userResponse, usersName);
         }
     }
 }
+
+// ---------------------End Of File ----------------------------//

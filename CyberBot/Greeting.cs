@@ -20,6 +20,9 @@ namespace CyberBot
             tone.PlaySync(); // Play the sound synchronously
         }
 
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+
         public static void LogoPrint() // This method prints the logo in the console
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow; // Set the text color to dark yellow
@@ -42,18 +45,21 @@ namespace CyberBot
             Console.ResetColor(); // Reset the console color to default
         }
 
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+
         /// This method initializes the user's name and greets them
-        public static string? InitializeName()
+        public static (string? userResponse, string usersName) InitializeName()
         {
             SpeechSynthesizer synthesizer = new SpeechSynthesizer(); // Create a SpeechSynthesizer object for text-to-speech
 
-            while (true) //Loop until a valid name is provided
+            while (true) // Loop until a valid name is provided
             {
-                    synthesizer.SpeakAsync("Please tell me your name and we can get started"); // Prompt the user for their name
+                synthesizer.SpeakAsync("Please tell me your name and we can get started"); // Prompt the user for their name
                 string usersName = Methods.CenteredUserInput("Please tell me your name and we can get started:  ");
                 Console.WriteLine();
 
-                if (string.IsNullOrEmpty(usersName)) //Check if the name is empty
+                if (string.IsNullOrWhiteSpace(usersName)) // Check if the name is empty
                 {
                     synthesizer.SpeakAsync("Please enter a valid name to continue"); // Prompt the user to enter a valid name
                     Methods.PrintCenteredStaticText("Please enter a valid name to continue");
@@ -63,11 +69,13 @@ namespace CyberBot
                 else
                 {
                     synthesizer.SpeakAsync($"Hello {usersName}, How can I help you today?"); // Greet the user with their name
-                    string? userResponse = Methods.CenteredUserInput($"Hello {usersName}, How can I help you today?:  ");
-                    Console.WriteLine();
-                    return userResponse;
+                    Methods.PrintCenteredStaticText($"Hello {usersName}, How can I help you today?");
+                    string? userResponse = Methods.CenteredUserInput($"{usersName}:");
+                    return (userResponse, usersName);
                 }
             }
         }
     }
 }
+
+// ---------------------End Of File ----------------------------//
