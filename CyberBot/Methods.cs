@@ -10,16 +10,10 @@ namespace CyberBot
 {
     internal class Methods
     {
-        public static void BorderPrint()
+        public static void BorderPrint() // Prints border around logo
         {
             int width = Console.WindowWidth;
             int height = 10;
-
-            if (width < 2 || height < 2)
-            {
-                Console.WriteLine("Width and height must be at least 2 to draw a border.");
-                return;
-            }
 
             // Draw top border
             Console.Write("+");
@@ -42,7 +36,7 @@ namespace CyberBot
 
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-        public static void PrintCenteredLogo(string LogoText)
+        public static void PrintCenteredLogo(string LogoText) // Prints logo in center
         {
             int windowWidth = Console.WindowWidth;
             int lineLength = LogoText.Length;
@@ -69,7 +63,7 @@ namespace CyberBot
 
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-        public static void PrintCenteredStaticText(string staticText)
+        public static void PrintCenteredStaticText(string staticText) // Prints text in the center
         {
             int windowWidth = Console.WindowWidth;
             int textLength = staticText.Length;
@@ -95,11 +89,11 @@ namespace CyberBot
 
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-        public static HashSet<string> GetUserInterest = new HashSet<string>();
+        public static HashSet<string> GetUserInterest = new HashSet<string>(); // A HashSet to store user interests, ensuring uniqueness and fast lookups.
 
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-        public static void InterestHandler(string interestedIn)
+        public static void InterestHandler(string interestedIn) // Handles user interest in various topics
         {
             foreach (var key in Dictionaries.InterestedIn.Keys)
             {
@@ -119,7 +113,7 @@ namespace CyberBot
 
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-        public static string GetCurrentTopic(string input)
+        public static string GetCurrentTopic(string input) // Determines the current topic of interest based on user input
         {
             foreach (var topic in Dictionaries.InterestedIn.Keys)
             {
@@ -134,7 +128,7 @@ namespace CyberBot
 
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-        public static string GetSentimentDetection(string userInput)
+        public static string GetSentimentDetection(string userInput) // Detects the sentiment of the user's input
         {
             userInput.ToLower();
 
@@ -150,11 +144,11 @@ namespace CyberBot
 
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-        public static string defaultEmotion = "nothing";
+        public static string defaultEmotion = "nothing"; // Default emotion to track the user's sentiment, initialized to "nothing".
 
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-        public static bool HandleSentiments(string userResponse, string topic, string usersName, out string newUserResponse)
+        public static bool HandleSentiments(string userResponse, string topic, string usersName, out string newUserResponse) // Handles the user's sentiments based on their response
         {
             newUserResponse = null;
             SpeechSynthesizer synthesizer = new SpeechSynthesizer();
@@ -166,7 +160,7 @@ namespace CyberBot
 
             defaultEmotion = sentiment;
 
-            string response = sentiment switch
+            string response = sentiment switch // Switch expression to determine the response based on the user's sentiment
             {
                 "worried" => $"Don't worry, it's natural to be worried about {topic}. Here are some tips to help.",
                 "curious" => $"Since you're curious about {topic}, here are some tips.",
@@ -174,7 +168,7 @@ namespace CyberBot
                 _ => null
             };
 
-            if (response != null)
+            if (response != null) // If a response is generated based on the sentiment
             {
                 synthesizer.SpeakAsync(response);
                 PrintCenteredStaticText("CyberBot: " + response);
@@ -195,14 +189,14 @@ namespace CyberBot
 
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-        public static bool HandleUserInterest(ref string userResponse, string usersName)
+        public static bool HandleUserInterest(ref string userResponse, string usersName) // Handles the user's interest in a specific topic
         {
             SpeechSynthesizer synthesizer = new SpeechSynthesizer();
 
             if (!userResponse.Contains("interested in"))
                 return false;
 
-            int startIndex = userResponse.IndexOf("interested in") + "interested in".Length;
+            int startIndex = userResponse.IndexOf("interested in") + "interested in".Length; // Finds the index of the phrase "interested in" and adds its length to get the start index of the topic
             string interestedTopic = userResponse.Substring(startIndex).Trim();
 
             if (!GetUserInterest.Contains(interestedTopic))
@@ -226,6 +220,18 @@ namespace CyberBot
 
             return true;
         }
+
+        public static void Thinking()
+        {
+            Console.Write("Pondering question");
+            for (int i = 0; i < 3; i++)
+            {
+                Thread.Sleep(400);
+                Console.Write(".");
+            }
+            Console.WriteLine();
+        }
+
 
     }
 }
