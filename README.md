@@ -4,6 +4,8 @@ Welcome to the cyberbot chatbot that helps you navigate the dangerous world of t
 
 // FULL TOUR //
 to see the code explained and demonstrated click the link below
+Part 1: https://youtu.be/4IQO9Q5wvec
+Part 2: https://youtu.be/UXbrHMvB9tQ
 
 
 // INSTALLATION //
