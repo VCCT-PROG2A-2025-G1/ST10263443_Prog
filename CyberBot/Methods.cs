@@ -71,11 +71,26 @@ namespace CyberBot
 
         public static void PrintCenteredStaticText(string staticText)
         {
-            int windowWidth = Console.WindowWidth; // calculates the width of the console window
-            int textLength = staticText.Length; // calculates the length of the text
-            int leftPadding = (windowWidth - textLength) / 2; // calculates the padding needed to center the text
+            int windowWidth = Console.WindowWidth;
+            int textLength = staticText.Length;
+            int leftPadding = (windowWidth - textLength) / 2;
 
-            Console.WriteLine(new string(' ', Math.Max(0, leftPadding)) + staticText); // prints the text with padding
+            // Ensure padding is at least 0
+            leftPadding = Math.Max(0, leftPadding);
+
+            // Move the cursor to the center padding
+            Console.SetCursorPosition(leftPadding, Console.CursorTop);
+
+            Random rand = new Random();
+
+            // Print one character at a time
+            foreach (char c in staticText)
+            {
+                Console.Write(c);
+                Thread.Sleep(rand.Next(20, 60)); // Simulate typing speed variation
+            }
+
+            Console.WriteLine();
         }
 
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//

@@ -11,7 +11,6 @@ namespace CyberBot
     class Responses
     {
         static string lastTopic = "";
-        static string lastSentiment = "";
 
         public static void GeneralQuestions(string userResponse, string usersName)
         {
@@ -41,12 +40,12 @@ namespace CyberBot
                         synthesizer.SpeakAsync("I am doing well, thank you for asking!");
                         Methods.PrintCenteredStaticText("CyberBot: I am doing well, thank you for asking!"); // uses custom method to print centered text
                         break;
-                    case string answer when answer.Contains("explain"): // Continuous conversation about a topic
+                    case string answer when answer.Contains("explain") || answer.Contains("tell") && answer.Contains("more"): // Continuous conversation about a topic
                         if (!string.IsNullOrEmpty(lastTopic))
                         {
                             synthesizer.SpeakAsync($"Sure, let's dive deeper into {lastTopic}.");
                             string tip = Dictionaries.InterestedIn.ContainsKey(lastTopic) ? Dictionaries.InterestedIn[lastTopic].Invoke() : "I'm still learning more about that.";
-                            Methods.PrintCenteredStaticText("CyberBot: " + tip);
+                            Methods.PrintCenteredStaticText("CyberBot: Sure, let's dive deeper into " + tip);
                         }
                         break;
                     case string answer when answer.Contains("what") && answer.Contains("purpose"):
