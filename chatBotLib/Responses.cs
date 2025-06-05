@@ -32,7 +32,7 @@ namespace chatBotLib
 
             if (Methods.HandleUserInterest(ref userResponse, usersName))
             {
-                result.Responses.Add($"Okay, I'll remember that you're interested in {userResponse}.");
+                result.Responses.Add($"Okay, I'll remember that you're interested in {userResponse}."); 
                 result.EndConversation = false; // or true, depending on your flow
                 return result; 
             }
