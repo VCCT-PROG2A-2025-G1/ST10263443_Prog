@@ -61,9 +61,6 @@
     <Compile Include="TaskManager.xaml.cs">
       <DependentUpon>TaskManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TaskManagerWindow.xaml.cs">
-      <DependentUpon>TaskManagerWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="ActivityLog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -92,10 +89,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TaskManager.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TaskManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

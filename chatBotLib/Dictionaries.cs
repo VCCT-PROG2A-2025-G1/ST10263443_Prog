@@ -18,6 +18,14 @@ namespace chatBotLib
             { "scam", () => Lists.ScamTips() },
             {"privacy", () => Lists.PrivacyTips() },
         };
+
+        public static Dictionary<string, Func<DateTime>> DateTimeQuestions = new Dictionary<string, Func<DateTime>>
+        {
+            { "today", () => DateTime.Today },
+            { "tomorrow", () => DateTime.Today.AddDays(1) },
+            { "next week", () => DateTime.Today.AddDays(7) },
+            { "next month", () => DateTime.Today.AddDays(30) },
+        };
     }
 }
 

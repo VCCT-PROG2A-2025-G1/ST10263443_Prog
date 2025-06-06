@@ -89,6 +89,22 @@ namespace chatBotLib
             return privacyTips[rand.Next(privacyTips.Count)];
         }
 
+
+            public static List<String> triggerWords = new List<string>
+            {
+                "remind me to",
+                "make sure to",
+                "could you remind me",
+                "don't let me forget"
+            };
+
+            public static List<String> dateIndicators = new List<string>
+            {
+                "on",
+                "at",
+                "by",
+                "before"
+            };
     }
 }
 

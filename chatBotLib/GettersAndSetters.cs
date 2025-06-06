@@ -15,26 +15,32 @@ namespace chatBotLib
         public bool TaskInput { get; internal set; }
     }
 
+    //------------------------------------------------------------------------------------------------------------------//
+
     public class TaskGetters : INotifyPropertyChanged
     {
-        public bool IsTaskCompleted;
-        private bool _IsTaskCompleted
+        private bool _isTaskCompleted;
+
+        public string TaskTitle { get; set; }
+        public string TaskDescription { get; set; }
+        public DateTime? TaskDate { get; set; }
+        public TimeSpan? TaskTime { get; set; }
+
+        public bool IsTaskCompleted
         {
-            get => _IsTaskCompleted;
+            get => _isTaskCompleted;
             set
             {
-                if (_IsTaskCompleted != value)
+                if (_isTaskCompleted != value)
                 {
-                    _IsTaskCompleted = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsTaskCompleted)));
+                    _isTaskCompleted = value;
+                    OnPropertyChanged(nameof(IsTaskCompleted));
                 }
             }
         }
 
-        public string TaskDescription { get; set; }
-        public string TaskTitle { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
-        public DateTime? TaskDate { get; set; }
-        public TimeSpan? TaskTime { get; set; }
+        protected void OnPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

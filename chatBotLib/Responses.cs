@@ -11,19 +11,21 @@ namespace chatBotLib
     public class Responses
 
     {
+        private static string userInput;
 
         public static async Task<GeneralQuestionResult> GeneralQuestionsAsync(
            string userResponse,
            string usersName,
             GettersAndSetters setters)
         {
+            userInput = userResponse; // Store the user input for later use
             var result = new GeneralQuestionResult();
 
             string sentiment = Methods.GetSentimentDetection(userResponse);
             string topic = Methods.GetCurrentTopic(userResponse);
 
-            string newResponse;
-            if (Methods.HandleSentiments(userResponse, topic, usersName, out newResponse))
+   
+            if (Methods.HandleSentiments(userResponse, topic, usersName, out string newResponse))
             {
                 result.Responses.Add(newResponse);
                 result.EndConversation = false; // or true, depending on your flow
@@ -35,6 +37,23 @@ namespace chatBotLib
                 result.Responses.Add($"Okay, I'll remember that you're interested in {userResponse}."); 
                 result.EndConversation = false; // or true, depending on your flow
                 return result; 
+            }
+
+
+            if (Methods.IsAddingTask || Methods.AskingForDate || Methods.WaitingForDate || Methods.AskingForTime || Methods.WaitingForTime)
+            {
+                string botReply = Methods.TaskFlow(userResponse); // FIXED: pass userResponse, not static userInput
+                result.Responses.Add(botReply ?? "Something went wrong in the task flow.");
+                result.EndConversation = false;
+                return result;
+            }
+
+            if (Methods.NLPReaction(userResponse, out string title, out string desc, out DateTime? date))
+            {
+                Methods.AddTask(title, desc, date);
+                result.Responses.Add($"Got it! I've added the task: \"{title}\" {(date.HasValue ? $"for {date.Value:dd-MM-yyyy}" : "")}.");
+                result.EndConversation = false;
+                return result;
             }
 
             switch (userResponse.ToLower()) // Switch cast to handle general questions user would ask
@@ -120,7 +139,7 @@ namespace chatBotLib
                     break;
 
                 case string answer when answer.Contains("scam") && answer.Contains("tips"):
-                    string scamTip = Lists.PhishingTips();
+                    string scamTip = Lists.ScamTips();
                     Methods.Thinking();
                     result.Responses.Add(scamTip);
                     break;
@@ -132,8 +151,9 @@ namespace chatBotLib
                     break;
 
                 case string answer when answer.Contains("add") && answer.Contains("task"):
-                    result.Responses.Add("Sure, what task would you like to add? Please type your task.");
+                    result.Responses.Add("Please provide a title for the task (format: Title - Description). If you want to skip description, just enter the title.");
                     setters.TaskInput = true;
+                    Methods.IsAddingTask = true;
                     result.EndConversation = false;
                     break;
 

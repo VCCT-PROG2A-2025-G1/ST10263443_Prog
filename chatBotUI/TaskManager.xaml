@@ -1,16 +1,53 @@
-﻿<Page x:Class="chatBotUI.TaskManager"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:chatBotUI"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="TaskManager">
-
+﻿<Window x:Class="chatBotUI.TaskManagerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:chatBotUI" xmlns:chatbotlib="clr-namespace:chatBotLib;assembly=chatBotLib" d:DataContext="{d:DesignInstance Type=chatbotlib:TaskGetters}"
+        mc:Ignorable="d"
+        Title="TaskManagerWindow" Height="475" Width="800">
     <Grid>
-        <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="Task Manager" VerticalAlignment="Top" Foreground="White" FontSize="30"/>
-        <StackPanel x:Name="ViewTaskPanel" Width="600" Height="300"/>
+        <Image Source="/Assets/backgroundThree.jpg"
+               Stretch="Fill"
+               IsHitTestVisible="False"/>
+        <Border Background="Gray" Height="48" VerticalAlignment="Top">
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Task Manager" VerticalAlignment="Center" FontSize="30" FontFamily="Cooper Black" Foreground="White"/>
+        </Border>
 
+
+        <ListView ItemsSource="{Binding Tasks}" Margin="10" Background="#90FFFFFF" d:ItemsSource="{d:SampleData ItemCount=5}" VerticalAlignment="Bottom" Height="380">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="5" CornerRadius="5">
+                        <StackPanel Width="720">
+                            <TextBlock Text="{Binding TaskTitle}" FontWeight="Bold" FontSize="16" TextDecorations="Underline"/>
+
+                            <TextBlock Text="{Binding TaskDescription}" TextWrapping="Wrap" Margin="0,5,0,0"/>
+
+                            <CheckBox Content=""
+                                  IsChecked="{Binding IsTaskCompleted, Mode=TwoWay}"
+                                  Checked="CompleteTask_Checked"
+                                  Tag="{Binding}" 
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Right">      
+                                <CheckBox.LayoutTransform>
+                                    <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                                </CheckBox.LayoutTransform>
+                            </CheckBox>
+
+                            <TextBlock Text="{Binding TaskDate, StringFormat='Due Date: {0:dd-MM-yyyy}'}" />
+                            <TextBlock Text="{Binding TaskTime, StringFormat='Due Time: {0:hh\\:mm}'}" />
+
+                            <Button Content="Delete"
+                            Width="80"
+                            Margin="0,5,0,0"
+                            HorizontalAlignment="Right"
+                            Click="DeleteTask_Click"
+                            Tag="{Binding}"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
-</Page>
+</Window>

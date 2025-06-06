@@ -1,6 +1,7 @@
 ﻿using chatBotLib;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,37 +12,34 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace chatBotUI
 {
     /// <summary>
-    /// Interaction logic for TaskManager.xaml
+    /// Interaction logic for TaskManagerWindow.xaml
     /// </summary>
-    public partial class TaskManager : Page
+    public partial class TaskManagerWindow : Window
     {
-        public TaskManager()
+        public ObservableCollection<TaskGetters> Tasks { get; set; }
+
+        public TaskManagerWindow()
         {
             InitializeComponent();
-            LoadTasks();
+            Tasks = Methods.Tasks;
+            DataContext = this;
         }
 
-        private void LoadTasks()
+        private void DeleteTask_Click(object sender, RoutedEventArgs e)
         {
-            var tasks = Methods.ViewTasks();
-            ViewTaskPanel.Children.Clear();
+            if (sender is Button button && button.Tag is TaskGetters task)
+                Methods.RemoveCreatedTask(task);
+        }
 
-            foreach (var task in tasks)
-            {
-                var taskText = new TextBlock
-                {
-                    Text = task,
-                    Margin = new Thickness(5),
-                    FontSize = 15
-                };
-                ViewTaskPanel.Children.Add(taskText);
-            }
+        private void CompleteTask_Checked(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox cb && cb.Tag is TaskGetters task)
+                Methods.CompleteTask(task);
         }
     }
 }
