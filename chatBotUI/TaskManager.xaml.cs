@@ -23,6 +23,8 @@ namespace chatBotUI
     {
         public ObservableCollection<TaskGetters> Tasks { get; set; }
 
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
         public TaskManagerWindow()
         {
             InitializeComponent();
@@ -30,11 +32,15 @@ namespace chatBotUI
             DataContext = this;
         }
 
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
         private void DeleteTask_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.Tag is TaskGetters task)
                 Methods.RemoveCreatedTask(task);
         }
+
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
         private void CompleteTask_Checked(object sender, RoutedEventArgs e)
         {
@@ -43,3 +49,5 @@ namespace chatBotUI
         }
     }
 }
+
+//---------------END OF FILE---------------//

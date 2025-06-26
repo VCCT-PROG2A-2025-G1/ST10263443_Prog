@@ -15,7 +15,7 @@
         </Border>
 
 
-        <ListView ItemsSource="{Binding Tasks}" Margin="10" Background="#90FFFFFF" d:ItemsSource="{d:SampleData ItemCount=5}" VerticalAlignment="Bottom" Height="380">
+        <ListView ItemsSource="{Binding Tasks}" Margin="10" Background="#90FFFFFF" d:ItemsSource="{d:SampleData ItemCount=5}" VerticalAlignment="Bottom" Height="360">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="5" CornerRadius="5">

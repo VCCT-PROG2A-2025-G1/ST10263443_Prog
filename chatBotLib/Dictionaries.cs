@@ -19,6 +19,9 @@ namespace chatBotLib
             {"privacy", () => Lists.PrivacyTips() },
         };
 
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+        // Dictionary to hold various cybersecurity topics and their corresponding questions retrieval methods.
         public static Dictionary<string, Func<DateTime>> DateTimeQuestions = new Dictionary<string, Func<DateTime>>
         {
             { "today", () => DateTime.Today },

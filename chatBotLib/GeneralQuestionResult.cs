@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace chatBotLib
 {
-    public class GeneralQuestionResult
+    public class GeneralQuestionResult // Represents the result of handling a general question in a chatbot context.
     {
         public List<string> Responses { get; set; }
         public bool EndConversation { get; set; }
@@ -17,6 +17,8 @@ namespace chatBotLib
             EndConversation = false;
         }
 
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+        // This class handles general questions and responses in a chatbot context.
         public static class GeneralQuestionsHandler
         {
             public static GeneralQuestionResult HandleUserInput(string userResponse, string usersName)
@@ -52,3 +54,5 @@ namespace chatBotLib
 
     }
 }
+
+//-----------END OF FILE-----------//

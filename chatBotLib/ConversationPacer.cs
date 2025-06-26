@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace chatBotLib
 {
+    // Task pacer class to manage the flow of conversation in a chatbot context.
     public class ConversationPacer
     {
         public bool TaskInput { get; set; }
@@ -18,3 +19,5 @@ namespace chatBotLib
         public DateTime? TempDate { get; set; }
     }
 }
+
+//----------END OF FILE-----------//

@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static chatBotLib.GeneralQuestionResult;
+using static chatBotLib.Methods;
 
 namespace chatBotUI
 {
@@ -34,6 +35,18 @@ namespace chatBotUI
             {
                 var taskManager = new TaskManagerWindow();
                 taskManager.Show();
+            };
+
+            Methods.ShowQuizWindow = () =>
+            {
+                CyberQuizler quizWindow = new CyberQuizler();
+                quizWindow.Show();
+            };
+
+            Methods.showActivityLog = () =>
+            {
+                var logWindow = new ActivityLog(ActivityTracker.GetLog());
+                logWindow.Show();
             };
 
         }

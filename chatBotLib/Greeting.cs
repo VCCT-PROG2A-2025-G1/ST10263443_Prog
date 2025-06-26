@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Media;
-using System.Speech.Synthesis;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,7 +37,7 @@ namespace chatBotLib
 
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-        public static void LogoPrint()
+        public static void LogoPrint() // This method prints the logo in the console
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
 
@@ -62,22 +61,19 @@ namespace chatBotLib
 
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-        public static (string userResponse, string usersName) InitializeName()
+        public static (string userResponse, string usersName) InitializeName() // This method initializes the user's name and greets them
         {
             while (true)
             {
-                Methods.SpeakOutput?.Invoke("Please tell me your name and we can get started");
                 string usersName = Methods.PromptUser?.Invoke("Please tell me your name and we can get started: ");
                 Methods.PrintOutput?.Invoke("");
 
                 if (string.IsNullOrWhiteSpace(usersName))
                 {
-                    Methods.SpeakOutput?.Invoke("Please enter a valid name to continue");
                     Methods.PrintOutput?.Invoke("Please enter a valid name to continue\n");
                     continue;
                 }
 
-                Methods.SpeakOutput?.Invoke($"Hello {usersName}, how can I help you today?");
                 Methods.PrintCenteredStaticText($"Hello {usersName}, how can I help you today?");
                 string userResponse = Methods.PromptUser?.Invoke($"{usersName}: ");
                 return (userResponse, usersName);
@@ -85,3 +81,5 @@ namespace chatBotLib
         }
     }
 }
+
+//-----------END OF FILE-----------//
