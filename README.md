@@ -1,18 +1,20 @@
 --------Chatbot--------
 
 Welcome to the cyberbot chatbot that helps you navigate the dangerous world of the cyber world.
+This Section of code is focused on additions to previous versions with the addition of a task manager, cyberquiz game, and an activity log
 
 // FULL TOUR //
 to see the code explained and demonstrated click the YouTube link: 
-https://youtu.be/4IQO9Q5wvec
+https://youtu.be/-Dp7dxPlEeQ
 
 // INSTALLATION //
 
 To use the application for yourself follow these easy steps:
 1. Download the file from GitHub
 2. Open the folder using visual studio
-3. On visual Studio navigate to Tools, NuGet Package Manager, Manage NuGet Packages, and download system.Speech by Microsoft
-4. Lastly click the play button at the top and enjoy
+3. Navigate to View/Solution Explorer
+4. On your left navigate to ChatBotUI and then mainwindow
+5. Lastly click the play button at the top and enjoy
 
 Current questions that you can ask include:
 - How are you
@@ -21,4 +23,7 @@ Current questions that you can ask include:
 - How can I keep my password safe
 - What is phishing
 - How can I browse safely
+- Add Task
+- Play Game
+- View log
 - exit
